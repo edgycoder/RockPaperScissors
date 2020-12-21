@@ -1,60 +1,24 @@
 // JavaScript Rock/Paper/Scissors exercise
-// Coded by: Joe Hinkle - August 28th, 2013
 // twitter.com/joe_hinkle
 // github.com/joehinkle
 
+/**
+ * Coded by EdgyCoder for joehinkle
+ * https://twitter.com/edgycoder
+ * This could be a better option to do a RPS simulator!
+ */
 
-// Initializing Variables
-var userChoice = prompt("Do you choose rock, paper or scissors?");
-var computerChoice = Math.random();
+const options = ['rock', 'paper', 'scissors']
+const args = prompt(`You have to use one of these options: [${options.join(', ')}]: `, 'rock')
+const computerPick = options[Math.floor(Math.random() * (2 - 0 + 1) + 0)]
+const userPick = args.toLowerCase()
 
-// Validation for user input
-if(userChoice != "rock" | "paper" | "scissors"){
-	prompt("You did not select rock, paper, or scissors. Please try again.")
+let state
+switch (userPick) {
+  case computerPick: state = "DRAW"; break
+  case options[0]: state = computerPick == options[2] ? "YOU WON" : "YOU LOST"; break
+  case options[1]: state = computerPick == options[0] ? "YOU WON" : "YOU LOST"; break
+  case options[2]: state = computerPick == options[1] ? "YOU WON" : "YOU LOST"; break
 }
 
-// Randomly selecting correct value for computerChoice
-if (computerChoice < 0.34) {
-	computerChoice = "rock";
-} else if(computerChoice <= 0.67) {
-	computerChoice = "paper";
-} else {
-	computerChoice = "scissors";
-}
-
-// Function that compares the two values
-function compare(choice1, choice2){
-	
-	if(choice1 == choice2){
-		return("The result is a tie!");
-	}
-	
-	if(choice1 == "rock"){
-		if(choice2 == "scissors"){
-			return("Rock wins!");
-		}
-		else{
-			return("Paper wins!");
-		}
-	}
-	
-	if (choice1 == "paper"){
-		if(choice2 == "rock"){
-			return("Paper wins!");
-		}
-		else{
-			return("Scissors win!");
-		}
-	}
-	
-	if (choice1 == "scissors") {
-		if (choice2 == "paper") {
-			return ("Scissors win!");
-		}
-		else {
-			return("Rock wins!");
-		}
-	}
-}
-
-compare(userChoice, computerChoice);
+console.log(`You choose ${userPick} and the computer choose ${computerPick} .. ${state}!`)
